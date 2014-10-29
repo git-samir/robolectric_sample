@@ -1,9 +1,6 @@
 package robolectric.example.com.initrobolectric;
 
-import android.widget.Button;
 import android.widget.TextView;
-
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,15 +11,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import static java.lang.Exception.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
-public class MainActivityTest{
+public class FirstActivityTest {
 
-    private MainActivity mainActivity;
+    private FirstActivity firstActivity;
 
     /**
      The @Before methods will be run before every test case,
@@ -31,22 +27,22 @@ public class MainActivityTest{
      */
     @Before
     public void setUp() throws Exception {
-        mainActivity = Robolectric.buildActivity(MainActivity.class).create().get();
+        firstActivity = Robolectric.buildActivity(FirstActivity.class).create().get();
     }
 
     @Test
     public void clickingButtonShouldChangeInitialText() {
-        mainActivity.findViewById(R.id.button_change_text).performClick();
-        String changedText = ((TextView) mainActivity.findViewById(R.id.textView)).getText().toString();
-        String expectedText = mainActivity.getResources().getString(R.string.changed_text);
+        firstActivity.findViewById(R.id.button_change_text).performClick();
+        String changedText = ((TextView) firstActivity.findViewById(R.id.textView)).getText().toString();
+        String expectedText = firstActivity.getResources().getString(R.string.changed_text);
         assertThat(expectedText, equalTo(changedText));
     }
 
     @Test
     public void clickingButtonShouldShowToast() {
-        mainActivity.findViewById(R.id.button_show_toast).performClick();
+        firstActivity.findViewById(R.id.button_show_toast).performClick();
         String toastShown = ShadowToast.getTextOfLatestToast();
-        String toastExpected = mainActivity.getResources().getString(R.string.hello_toast);
+        String toastExpected = firstActivity.getResources().getString(R.string.hello_toast);
         assertThat(toastExpected, equalTo(toastShown));
     }
 

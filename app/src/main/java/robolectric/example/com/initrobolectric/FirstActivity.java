@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class FirstActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Button buttonChangeText;
     private Button buttonShowToast;
@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_first);
 
         buttonChangeText = (Button) findViewById(R.id.button_change_text);
         buttonChangeText.setOnClickListener(this);
@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 textView.setText(R.string.changed_text);
                 break;
             case R.id.button_show_toast:
-                Toast.makeText(MainActivity.this, R.string.hello_toast, Toast.LENGTH_LONG).show();
+                Toast.makeText(FirstActivity.this, R.string.hello_toast, Toast.LENGTH_LONG).show();
                 break;
         }
     }
