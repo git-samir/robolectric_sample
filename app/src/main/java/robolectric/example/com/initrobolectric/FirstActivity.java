@@ -1,5 +1,6 @@
 package robolectric.example.com.initrobolectric;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -12,6 +13,7 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
 
     private Button buttonChangeText;
     private Button buttonShowToast;
+    private Button buttonStartNext;
     private TextView textView;
 
     @Override
@@ -23,6 +25,8 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
         buttonChangeText.setOnClickListener(this);
         buttonShowToast = (Button) findViewById(R.id.button_show_toast);
         buttonShowToast.setOnClickListener(this);
+        buttonStartNext = (Button) findViewById(R.id.button_start_second_activity);
+        buttonStartNext.setOnClickListener(this);
         textView = (TextView) findViewById(R.id.textView);
     }
 
@@ -39,6 +43,9 @@ public class FirstActivity extends ActionBarActivity implements View.OnClickList
                 break;
             case R.id.button_show_toast:
                 Toast.makeText(FirstActivity.this, R.string.hello_toast, Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_start_second_activity:
+                startActivity(new Intent(FirstActivity.this, SecondActivity.class));
                 break;
         }
     }
