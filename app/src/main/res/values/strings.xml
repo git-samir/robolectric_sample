@@ -12,10 +12,10 @@
     <!-- TextView Texts -->
     <string name="initial_text">Initial text</string>
     <string name="changed_text">Changed text</string>
-    <string name="welcome_second">Welcome to second activity</string>
+    <string name="welcome_second">Welcome to Second Activity</string>
 
     <!-- Messages -->
-    <string name="hello_toast">Hello from toast</string>
+    <string name="hello_toast">Hello toast</string>
 
     <!-- Button Texts -->
     <string name="change_text">Change Text</string>

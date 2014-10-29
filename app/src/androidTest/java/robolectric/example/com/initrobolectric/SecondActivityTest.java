@@ -1,5 +1,8 @@
 package robolectric.example.com.initrobolectric;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
@@ -41,11 +46,32 @@ public class SecondActivityTest {
 
     @Test
     public void testTextView_shouldHaveCorrectText() throws Exception{
-        String expectedText = textView.getText().toString();
-        String actualText = activity.getResources().getString(R.string.welcome_second);
+        String actualText = textView.getText().toString();
+        String expectedText = activity.getResources().getString(R.string.welcome_second);
         assertThat(expectedText, equalTo(actualText));
         // you can also use org.junit.Assert.assertEquals to check if two objects are same or not.
         assertEquals(expectedText, actualText);
+    }
+
+    @Test @Config(qualifiers = "en")
+    public void testTextView_shouldHaveEnglishText() throws Exception{
+        String actualText = textView.getText().toString();
+        String expectedText = getLocaleResources("en").getString(R.string.welcome_second);
+
+    }
+
+    @Test @Config(qualifiers = "fr")
+    public void testTextView_shouldHaveFrenchText() throws Exception{
+        String actualText = textView.getText().toString();
+        String expectedText = getLocaleResources("fr").getString(R.string.welcome_second);
+    }
+
+    private Resources getLocaleResources(String locale) {
+        Configuration conf = activity.getResources().getConfiguration();
+        conf.locale = new Locale("en");
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return new Resources(activity.getAssets(), metrics, conf);
     }
 
     @After
