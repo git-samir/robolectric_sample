@@ -15,6 +15,7 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.shadows.ShadowToast;
 
+import static java.lang.Exception.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.robolectric.Robolectric.shadowOf;
@@ -41,7 +42,7 @@ public class FirstActivityTest {
         firstActivity.findViewById(R.id.button_change_text).performClick();
         String changedText = ((TextView) firstActivity.findViewById(R.id.textView)).getText().toString();
         String expectedText = firstActivity.getResources().getString(R.string.changed_text);
-        assertThat(expectedText, equalTo(changedText));
+        assertThat(changedText, equalTo(expectedText));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class FirstActivityTest {
         firstActivity.findViewById(R.id.button_show_toast).performClick();
         String toastShown = ShadowToast.getTextOfLatestToast();
         String toastExpected = firstActivity.getResources().getString(R.string.hello_toast);
-        assertThat(toastExpected, equalTo(toastShown));
+        assertThat(toastShown, equalTo(toastExpected));
     }
 
     @Test
@@ -57,8 +58,7 @@ public class FirstActivityTest {
         firstActivity.findViewById(R.id.button_start_second_activity).performClick();
         ShadowActivity shadowActivity = shadowOf(firstActivity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = shadowOf(startedIntent);
-        assertThat(shadowIntent.getComponent().getClassName(), equalTo(SecondActivity.class.getName()));
+        assertThat(startedIntent.getComponent().getClassName(), equalTo(SecondActivity.class.getName()));
     }
 
 
