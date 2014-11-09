@@ -57,13 +57,14 @@ public class SecondActivityTest {
     public void testTextView_shouldHaveEnglishText() throws Exception{
         String actualText = textView.getText().toString();
         String expectedText = getLocaleResources("en").getString(R.string.welcome_second);
-
+        assertThat(actualText,equalTo(expectedText));
     }
 
     @Test @Config(qualifiers = "fr")
     public void testTextView_shouldHaveFrenchText() throws Exception{
         String actualText = textView.getText().toString();
         String expectedText = getLocaleResources("fr").getString(R.string.welcome_second);
+        assertThat(actualText,equalTo(expectedText));
     }
 
     private Resources getLocaleResources(String locale) {
