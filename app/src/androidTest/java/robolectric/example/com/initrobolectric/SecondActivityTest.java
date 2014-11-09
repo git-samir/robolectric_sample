@@ -40,7 +40,7 @@ public class SecondActivityTest {
     @Test
     public void shouldHaveALogo() throws Exception {
         assertThat(imageView.getVisibility(), equalTo(View.VISIBLE));
-        assertThat(shadowOf(imageView.getDrawable()).getCreatedFromResId(),
+        assertThat(shadowOf(imageView).getImageResourceId(),
                 equalTo(R.drawable.robolectric));
     }
 
@@ -48,7 +48,7 @@ public class SecondActivityTest {
     public void testTextView_shouldHaveCorrectText() throws Exception{
         String actualText = textView.getText().toString();
         String expectedText = activity.getResources().getString(R.string.welcome_second);
-        assertThat(expectedText, equalTo(actualText));
+        assertThat(actualText, equalTo(expectedText));
         // you can also use org.junit.Assert.assertEquals to check if two objects are same or not.
         assertEquals(expectedText, actualText);
     }
